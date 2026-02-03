@@ -1,0 +1,10 @@
+DIGITAL PERSONAL DATA PROTECTION ACT 2023 - INTERNAL COMPLIANCE POLICY
+
+1. Data Fiduciary Responsibilities
+Every Data Fiduciary shall ensure that personal data is processed only for the specific purpose for which the Data Principal has given consent. 
+
+2. Rights of Data Principals
+Data Principals have the right to access information about their personal data, the right to correction, and the right to grievance redressal.
+
+3. Breach Notification
+In the event of a personal data breach, the Data Fiduciary must notify the Data Protection Board of India and each affected Data Principal immediately.
