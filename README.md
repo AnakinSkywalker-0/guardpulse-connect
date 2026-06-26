@@ -1,4 +1,3 @@
-
 # GuardPulse Connect
 
 > **Production-Grade Agentic RegTech Framework & Onboarding Marketplace**
