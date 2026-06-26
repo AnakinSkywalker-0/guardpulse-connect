@@ -1,0 +1,344 @@
+{
+  "startup_name": "TestCo",
+  "document_audited": "c63be6ce3a9445d1aafa39056851f080.txt",
+  "legal_score": 67.5,
+  "tech_score": 40.0,
+  "critic_penalty": 0.0,
+  "guardpulse_score": 55.0,
+  "badge": "NOT_READY",
+  "legal_audit": {
+    "target_document": "c63be6ce3a9445d1aafa39056851f080.txt",
+    "laws_checked": [
+      "DPDP_2023",
+      "EU_AI_ACT_2024"
+    ],
+    "clauses": [
+      {
+        "clause_ref": "DPDP \u00a75",
+        "clause_summary": "Privacy notice",
+        "verdict": "PASS",
+        "evidence": "This Privacy Policy explains how we collect, use, store, and share personal data",
+        "confidence": 1.0
+      },
+      {
+        "clause_ref": "DPDP \u00a76",
+        "clause_summary": "Valid consent",
+        "verdict": "PARTIAL",
+        "evidence": "Not addressed in document.",
+        "confidence": 0.5
+      },
+      {
+        "clause_ref": "DPDP \u00a78",
+        "clause_summary": "Data retention",
+        "verdict": "PASS",
+        "evidence": "We retain personal data for as long as your account is active.",
+        "confidence": 1.0
+      },
+      {
+        "clause_ref": "DPDP \u00a79",
+        "clause_summary": "Children data",
+        "verdict": "PASS",
+        "evidence": "Our platform is intended for business use only (18+).",
+        "confidence": 1.0
+      },
+      {
+        "clause_ref": "DPDP \u00a711",
+        "clause_summary": "User right to access",
+        "verdict": "PASS",
+        "evidence": "You may contact us to: Request access to your personal data",
+        "confidence": 1.0
+      },
+      {
+        "clause_ref": "DPDP \u00a712",
+        "clause_summary": "User right to correct",
+        "verdict": "PASS",
+        "evidence": "You may contact us to: Correct inaccurate information",
+        "confidence": 1.0
+      },
+      {
+        "clause_ref": "DPDP \u00a713",
+        "clause_summary": "Grievance redressal",
+        "verdict": "PASS",
+        "evidence": "Email: dpo@techflow.io",
+        "confidence": 1.0
+      },
+      {
+        "clause_ref": "DPDP \u00a716",
+        "clause_summary": "Data breach notification",
+        "verdict": "FAIL",
+        "evidence": "Not addressed in document.",
+        "confidence": 0.0
+      },
+      {
+        "clause_ref": "EU AI Art.5",
+        "clause_summary": "No prohibited AI practices used",
+        "verdict": "INCONCLUSIVE",
+        "evidence": "Document is not an AI system disclosure \u2014 EU AI Act not applicable.",
+        "confidence": 0.9
+      },
+      {
+        "clause_ref": "EU AI Art.9",
+        "clause_summary": "Risk management system documented",
+        "verdict": "INCONCLUSIVE",
+        "evidence": "Document is not an AI system disclosure \u2014 EU AI Act not applicable.",
+        "confidence": 0.9
+      },
+      {
+        "clause_ref": "EU AI Art.13",
+        "clause_summary": "Transparency obligations met",
+        "verdict": "INCONCLUSIVE",
+        "evidence": "Document is not an AI system disclosure \u2014 EU AI Act not applicable.",
+        "confidence": 0.9
+      },
+      {
+        "clause_ref": "EU AI Art.14",
+        "clause_summary": "Human oversight mechanisms defined",
+        "verdict": "INCONCLUSIVE",
+        "evidence": "Document is not an AI system disclosure \u2014 EU AI Act not applicable.",
+        "confidence": 0.9
+      }
+    ],
+    "pii_findings": [
+      {
+        "pii_type": "NAME",
+        "context_snippet": "Full name and email address",
+        "risk_level": "MEDIUM",
+        "relevant_law": "DPDP Act 2023 \u00a72(t)",
+        "recommendation": "Hash and store names securely"
+      },
+      {
+        "pii_type": "EMAIL",
+        "context_snippet": "Full name and email address",
+        "risk_level": "MEDIUM",
+        "relevant_law": "DPDP Act 2023 \u00a72(t)",
+        "recommendation": "Use secure email transmission protocols"
+      },
+      {
+        "pii_type": "PHONE",
+        "context_snippet": "Phone number and business address",
+        "risk_level": "MEDIUM",
+        "relevant_law": "DPDP Act 2023 \u00a72(t)",
+        "recommendation": "Store phone numbers with access controls"
+      },
+      {
+        "pii_type": "ADDRESS",
+        "context_snippet": "Phone number and business address",
+        "risk_level": "MEDIUM",
+        "relevant_law": "DPDP Act 2023 \u00a72(t)",
+        "recommendation": "Use address verification for security"
+      },
+      {
+        "pii_type": "FINANCIAL_DATA",
+        "context_snippet": "Payment and billing information",
+        "risk_level": "CRITICAL",
+        "relevant_law": "DPDP Act 2023 \u00a72(t) and PCI-DSS",
+        "recommendation": "Use tokenization for credit card details"
+      },
+      {
+        "pii_type": "IP_ADDRESS",
+        "context_snippet": "IP addresses and device identifiers",
+        "risk_level": "LOW",
+        "relevant_law": "DPDP Act 2023 \u00a72(t)",
+        "recommendation": "Use IP anonymization for analytics"
+      },
+      {
+        "pii_type": "DEVICE_ID",
+        "context_snippet": "IP addresses and device identifiers",
+        "risk_level": "LOW",
+        "relevant_law": "DPDP Act 2023 \u00a72(t)",
+        "recommendation": "Use secure device identifier storage"
+      },
+      {
+        "pii_type": "COOKIES",
+        "context_snippet": "Browser cookies and session tokens",
+        "risk_level": "LOW",
+        "relevant_law": "DPDP Act 2023 \u00a72(t)",
+        "recommendation": "Use secure cookie flags and expiration"
+      },
+      {
+        "pii_type": "AADHAAR",
+        "context_snippet": "Aadhaar number (for KYC verification",
+        "risk_level": "CRITICAL",
+        "relevant_law": "Aadhaar Act 2016 \u00a74(1) and DPDP Act 2023 \u00a72(t)",
+        "recommendation": "Store Aadhaar numbers with strong access controls"
+      },
+      {
+        "pii_type": "DATE_OF_BIRTH",
+        "context_snippet": "Date of birth (for account verification)",
+        "risk_level": "MEDIUM",
+        "relevant_law": "DPDP Act 2023 \u00a72(t)",
+        "recommendation": "Hash and store dates of birth securely"
+      }
+    ],
+    "legal_score": 67.5,
+    "overall_verdict": "PARTIAL",
+    "summary": "The startup has demonstrated compliance with certain data protection clauses, including DPDP \u00a75: Privacy notice, DPDP \u00a78: Data retention, DPDP \u00a79: Children data, and DPDP \u00a711: User right to access. However, the startup needs to improve its compliance with other clauses to achieve full compliance.",
+    "recommendations": [
+      "Implement a data breach notification process to comply with DPDP \u00a716",
+      "Review and update policies to ensure full compliance with all relevant clauses",
+      "Develop a plan to address failed clauses and conduct regular audits to ensure ongoing compliance"
+    ]
+  },
+  "tech_audit": {
+    "target_document": "/app/data/uploads/c63be6ce3a9445d1aafa39056851f080.txt",
+    "security_findings": [
+      {
+        "finding_type": "BROAD_DATA_COLLECTION",
+        "severity": "MEDIUM",
+        "location": "2. DATA WE COLLECT",
+        "description": "Collects extensive personal data",
+        "recommendation": "Minimize data collection to necessary fields"
+      },
+      {
+        "finding_type": "NO_DELETION_POLICY",
+        "severity": "LOW",
+        "location": "5. DATA RETENTION",
+        "description": "90-day deletion delay",
+        "recommendation": "Implement immediate data deletion upon request"
+      },
+      {
+        "finding_type": "INSECURE_STORAGE",
+        "severity": "HIGH",
+        "location": "8. SECURITY",
+        "description": "Annual security audits only",
+        "recommendation": "Conduct regular and frequent security audits"
+      },
+      {
+        "finding_type": "PII_LOGGED",
+        "severity": "CRITICAL",
+        "location": "2. DATA WE COLLECT",
+        "description": "Logs sensitive data like Aadhaar number",
+        "recommendation": "Avoid logging sensitive personal data"
+      }
+    ],
+    "tech_score": 40.0,
+    "api_documented": false,
+    "encryption_present": true,
+    "auth_present": false,
+    "data_minimisation": false,
+    "summary": "Your startup's security currently poses some risks, including the collection of extensive personal data, a 90-day delay in deleting user data, and only annual security audits. However, it's worth noting that your startup does implement encryption, which is a good security practice, and addressing the identified risks can help improve overall security.",
+    "recommendations": [
+      "Avoid logging sensitive personal data",
+      "Conduct regular and frequent security audits",
+      "Minimize data collection to necessary fields",
+      "Implement immediate data deletion upon request"
+    ]
+  },
+  "critic_result": {
+    "total_claims_checked": 12,
+    "valid_claims": 12,
+    "invalid_claims": 0,
+    "citation_checks": [
+      {
+        "original_claim": "Privacy notice (This Privacy Policy explains how we collect, use, store, and share personal data)",
+        "citation_ref": "DPDP \u00a75",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      },
+      {
+        "original_claim": "Valid consent (Not addressed in document.)",
+        "citation_ref": "DPDP \u00a76",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      },
+      {
+        "original_claim": "Data retention (We retain personal data for as long as your account is active.)",
+        "citation_ref": "DPDP \u00a78",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      },
+      {
+        "original_claim": "Children data (Our platform is intended for business use only (18+).)",
+        "citation_ref": "DPDP \u00a79",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      },
+      {
+        "original_claim": "User right to access (You may contact us to: Request access to your personal data)",
+        "citation_ref": "DPDP \u00a711",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      },
+      {
+        "original_claim": "User right to correct (You may contact us to: Correct inaccurate information)",
+        "citation_ref": "DPDP \u00a712",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.9
+      },
+      {
+        "original_claim": "Grievance redressal (Email: dpo@techflow.io)",
+        "citation_ref": "DPDP \u00a713",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      },
+      {
+        "original_claim": "Data breach notification (Not addressed in document.)",
+        "citation_ref": "DPDP \u00a716",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      },
+      {
+        "original_claim": "No prohibited AI practices used (Document is not an AI system disclosure \u2014 EU AI Act not applicable.)",
+        "citation_ref": "EU AI Art.5",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      },
+      {
+        "original_claim": "Risk management system documented (Document is not an AI system disclosure \u2014 EU AI Act not applicable.)",
+        "citation_ref": "EU AI Art.9",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      },
+      {
+        "original_claim": "Transparency obligations met (Document is not an AI system disclosure \u2014 EU AI Act not applicable.)",
+        "citation_ref": "EU AI Art.13",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      },
+      {
+        "original_claim": "Human oversight mechanisms defined (Document is not an AI system disclosure \u2014 EU AI Act not applicable.)",
+        "citation_ref": "EU AI Art.14",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.8
+      }
+    ],
+    "hallucination_rate": 0.0,
+    "critic_verdict": "RELIABLE",
+    "notes": "All 12 citations verified against ChromaDB law text."
+  },
+  "executive_summary": "GuardPulse Score: 55.0/100. Badge: NOT_READY.",
+  "top_risks": [
+    "Review legal audit",
+    "Review tech audit",
+    "Address critical findings"
+  ],
+  "top_strengths": [
+    "Audit completed",
+    "RAG-grounded analysis",
+    "Multi-law coverage"
+  ],
+  "next_steps": [
+    "Fix failed clauses",
+    "Address security findings",
+    "Re-audit"
+  ],
+  "audited_by": "GuardPulse Swarm v2.0",
+  "contact_email": "test@example.com",
+  "submitted_at": "2026-06-20T14:55:59.973829",
+  "report_id": "006d0e4b54",
+  "is_enterprise_ready": false,
+  "hallucination_rate": 0.0,
+  "report_url": "/api/reports/006d0e4b54"
+}

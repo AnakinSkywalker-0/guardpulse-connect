@@ -1,0 +1,176 @@
+{
+  "target_document": "sample_ai_disclosure.txt",
+  "law_ids_checked": [
+    "DPDP_2023"
+  ],
+  "overall_verdict": "PARTIAL",
+  "score": 56.2,
+  "clauses": [
+    {
+      "clause_ref": "DPDP 2023 \u00a79",
+      "clause_summary": "Consent obtained before processing personal data of children.",
+      "verdict": "PASS",
+      "evidence": "No mention of consent for children's data in the document.",
+      "confidence": 1.0
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a711",
+      "clause_summary": "Right to access information about personal data.",
+      "verdict": "PASS",
+      "evidence": "Document mentions 'a summary of personal data' and 'identities of all other Data Fiduciaries'.",
+      "confidence": 1.0
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a712",
+      "clause_summary": "Right to correction and erasure of personal data.",
+      "verdict": "PASS",
+      "evidence": "Document mentions 'correction, completion, updating' of personal data.",
+      "confidence": 1.0
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a713",
+      "clause_summary": "Grievance redressal mechanism exists.",
+      "verdict": "INCONCLUSIVE",
+      "evidence": "No mention of grievance redressal in the document.",
+      "confidence": 0.5
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a78",
+      "clause_summary": "Data retention and deletion policy defined.",
+      "verdict": "PARTIAL",
+      "evidence": "Document mentions 'monthly audits' but no specific data retention/deletion policy.",
+      "confidence": 0.7
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a75",
+      "clause_summary": "Privacy notice provided to users.",
+      "verdict": "FAIL",
+      "evidence": "No mention of privacy notice in the document.",
+      "confidence": 1.0
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a76",
+      "clause_summary": "Consent obtained before data collection.",
+      "verdict": "FAIL",
+      "evidence": "Document does not mention consent for data collection.",
+      "confidence": 1.0
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a74",
+      "clause_summary": "Purpose of data collection clearly stated.",
+      "verdict": "PARTIAL",
+      "evidence": "Document mentions 'intended use' but no specific purpose stated.",
+      "confidence": 0.6
+    }
+  ],
+  "pii_findings": [
+    {
+      "pii_type": "NAME",
+      "context_snippet": "Enterprise transaction records",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Ensure that only authorized personnel have access to enterprise transaction records."
+    },
+    {
+      "pii_type": "EMAIL",
+      "context_snippet": "",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Implement email encryption and secure communication protocols."
+    },
+    {
+      "pii_type": "PHONE",
+      "context_snippet": "",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use phone number anonymization techniques in data storage and transmission."
+    },
+    {
+      "pii_type": "AADHAAR",
+      "context_snippet": "",
+      "risk_level": "CRITICAL",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Do not collect, store, or use Aadhaar numbers for any purpose."
+    },
+    {
+      "pii_type": "PAN",
+      "context_snippet": "",
+      "risk_level": "CRITICAL",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Do not collect, store, or use PAN numbers for any purpose."
+    },
+    {
+      "pii_type": "ADDRESS",
+      "context_snippet": "",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use address anonymization techniques in data storage and transmission."
+    },
+    {
+      "pii_type": "IP_ADDRESS",
+      "context_snippet": "AI Safety team",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Implement IP address anonymization techniques in data storage and transmission."
+    },
+    {
+      "pii_type": "LOCATION",
+      "context_snippet": "",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use location anonymization techniques in data storage and transmission."
+    },
+    {
+      "pii_type": "HEALTH_DATA",
+      "context_snippet": "",
+      "risk_level": "CRITICAL",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Do not collect, store, or use health data for any purpose."
+    },
+    {
+      "pii_type": "FINANCIAL_DATA",
+      "context_snippet": "",
+      "risk_level": "CRITICAL",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Do not collect, store, or use financial data for any purpose."
+    },
+    {
+      "pii_type": "BIOMETRIC",
+      "context_snippet": "",
+      "risk_level": "CRITICAL",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Do not collect, store, or use biometric data for any purpose."
+    },
+    {
+      "pii_type": "DEVICE_ID",
+      "context_snippet": "",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Implement device ID anonymization techniques in data storage and transmission."
+    },
+    {
+      "pii_type": "COOKIES",
+      "context_snippet": "",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use cookie anonymization techniques in data storage and transmission."
+    },
+    {
+      "pii_type": "BROWSING_HISTORY",
+      "context_snippet": "",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Implement browsing history anonymization techniques in data storage and transmission."
+    },
+    {
+      "pii_type": "DATE_OF_BIRTH",
+      "context_snippet": "",
+      "risk_level": "CRITICAL",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Do not collect, store, or use date of birth for any purpose."
+    }
+  ],
+  "summary": "Audit complete. Review individual clause results.",
+  "recommendations": [],
+  "audited_by": "GuardPulse Compliance Agent v1.0"
+}

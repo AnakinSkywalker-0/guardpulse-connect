@@ -1,0 +1,283 @@
+{
+  "name": "GuardPulse — Compliance Audit Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "guardpulse-audit",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node_webhook",
+      "name": "Form Submitted",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ],
+      "webhookId": "guardpulse-audit"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://api:8000/webhook/audit",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "startup_name",
+              "value": "={{ $json.body.startup_name }}"
+            },
+            {
+              "name": "contact_email",
+              "value": "={{ $json.body.contact_email }}"
+            },
+            {
+              "name": "document",
+              "value": "document0",
+              "parameterType": "formBinaryData"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "node_run_swarm",
+      "name": "Run GuardPulse Swarm",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "score_check",
+              "leftValue": "={{ $json.guardpulse_score }}",
+              "rightValue": 80,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node_if_score",
+      "name": "Score ≥ 80?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "#enterprise-alerts",
+          "mode": "name"
+        },
+        "text": "🟢 *Enterprise-Ready Startup Detected!*\n\n*Startup:* {{ $('Run GuardPulse Swarm').item.json.startup_name }}\n*Score:* {{ $('Run GuardPulse Swarm').item.json.guardpulse_score }}/100\n*Badge:* {{ $('Run GuardPulse Swarm').item.json.badge }}\n*Legal:* {{ $('Run GuardPulse Swarm').item.json.legal_score }}/100\n*Tech:* {{ $('Run GuardPulse Swarm').item.json.tech_score }}/100\n*Contact:* {{ $('Run GuardPulse Swarm').item.json.contact_email }}\n\n*Summary:* {{ $('Run GuardPulse Swarm').item.json.executive_summary }}\n\n*Report:* {{ $('Run GuardPulse Swarm').item.json.report_url }}",
+        "otherOptions": {}
+      },
+      "id": "node_slack",
+      "name": "Slack Alert — Enterprise Ready",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [
+        900,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Run GuardPulse Swarm').item.json.contact_email }}",
+        "subject": "Your GuardPulse Compliance Report — {{ $('Run GuardPulse Swarm').item.json.startup_name }}",
+        "emailType": "html",
+        "message": "<!DOCTYPE html><html><body style=\"font-family:-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:2rem;\">\n<div style=\"background:#1D9E75;padding:1rem 1.5rem;border-radius:8px;margin-bottom:1.5rem;\">\n  <h1 style=\"color:#fff;margin:0;font-size:20px;\">GuardPulse Compliance Report</h1>\n</div>\n\n<p>Hi {{ $('Run GuardPulse Swarm').item.json.startup_name }},</p>\n<p>Your compliance audit is complete. Here are your results:</p>\n\n<div style=\"background:#f5f4f0;border-radius:8px;padding:1.5rem;margin:1.5rem 0;\">\n  <div style=\"font-size:42px;font-weight:600;color:{% if $('Run GuardPulse Swarm').item.json.guardpulse_score >= 80 %}#1D9E75{% elif $('Run GuardPulse Swarm').item.json.guardpulse_score >= 60 %}#BA7517{% else %}#A32D2D{% endif %};\">\n    {{ $('Run GuardPulse Swarm').item.json.guardpulse_score }}/100\n  </div>\n  <div style=\"font-size:14px;font-weight:600;margin-top:4px;\">{{ $('Run GuardPulse Swarm').item.json.badge }}</div>\n</div>\n\n<table style=\"width:100%;border-collapse:collapse;margin-bottom:1.5rem;\">\n  <tr>\n    <td style=\"padding:8px;background:#f5f4f0;border-radius:4px;text-align:center;width:33%;\">\n      <div style=\"font-size:20px;font-weight:500;\">{{ $('Run GuardPulse Swarm').item.json.legal_score }}/100</div>\n      <div style=\"font-size:11px;color:#73726c;\">Legal Score</div>\n    </td>\n    <td style=\"width:10px;\"></td>\n    <td style=\"padding:8px;background:#f5f4f0;border-radius:4px;text-align:center;width:33%;\">\n      <div style=\"font-size:20px;font-weight:500;\">{{ $('Run GuardPulse Swarm').item.json.tech_score }}/100</div>\n      <div style=\"font-size:11px;color:#73726c;\">Tech Score</div>\n    </td>\n    <td style=\"width:10px;\"></td>\n    <td style=\"padding:8px;background:#f5f4f0;border-radius:4px;text-align:center;width:33%;\">\n      <div style=\"font-size:20px;font-weight:500;\">{{ ($('Run GuardPulse Swarm').item.json.hallucination_rate * 100).toFixed(0) }}%</div>\n      <div style=\"font-size:11px;color:#73726c;\">Hallucinations</div>\n    </td>\n  </tr>\n</table>\n\n<h3 style=\"font-size:14px;\">Summary</h3>\n<p style=\"font-size:13px;color:#3d3d3a;line-height:1.6;\">{{ $('Run GuardPulse Swarm').item.json.executive_summary }}</p>\n\n<h3 style=\"font-size:14px;margin-top:1.5rem;\">Next Steps</h3>\n<ul style=\"font-size:13px;color:#3d3d3a;line-height:1.8;\">\n{{ $('Run GuardPulse Swarm').item.json.next_steps.map(s => '<li>' + s + '</li>').join('') }}\n</ul>\n\n<p style=\"font-size:12px;color:#888780;margin-top:2rem;\">Report ID: {{ $('Run GuardPulse Swarm').item.json.report_id }} · GuardPulse v2.0</p>\n</body></html>",
+        "options": {}
+      },
+      "id": "node_email",
+      "name": "Email Scorecard",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "create",
+        "databaseId": {
+          "__rl": true,
+          "value": "YOUR_NOTION_DATABASE_ID",
+          "mode": "id"
+        },
+        "title": "={{ $('Run GuardPulse Swarm').item.json.startup_name }} — {{ $('Run GuardPulse Swarm').item.json.badge }}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Score|number",
+              "numberValue": "={{ $('Run GuardPulse Swarm').item.json.guardpulse_score }}"
+            },
+            {
+              "key": "Badge|select",
+              "selectValue": "={{ $('Run GuardPulse Swarm').item.json.badge }}"
+            },
+            {
+              "key": "Legal Score|number",
+              "numberValue": "={{ $('Run GuardPulse Swarm').item.json.legal_score }}"
+            },
+            {
+              "key": "Tech Score|number",
+              "numberValue": "={{ $('Run GuardPulse Swarm').item.json.tech_score }}"
+            },
+            {
+              "key": "Contact Email|email",
+              "emailValue": "={{ $('Run GuardPulse Swarm').item.json.contact_email }}"
+            },
+            {
+              "key": "Submitted At|date",
+              "dateValue": "={{ $('Run GuardPulse Swarm').item.json.submitted_at }}"
+            },
+            {
+              "key": "Report URL|url",
+              "urlValue": "={{ $('Run GuardPulse Swarm').item.json.report_url }}"
+            },
+            {
+              "key": "Enterprise Ready|checkbox",
+              "checkboxValue": "={{ $('Run GuardPulse Swarm').item.json.is_enterprise_ready }}"
+            }
+          ]
+        }
+      },
+      "id": "node_notion",
+      "name": "Log to Notion CRM",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($('Run GuardPulse Swarm').item.json) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "node_respond",
+      "name": "Respond to Form",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1120,
+        500
+      ]
+    }
+  ],
+  "connections": {
+    "Form Submitted": {
+      "main": [
+        [
+          {
+            "node": "Run GuardPulse Swarm",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run GuardPulse Swarm": {
+      "main": [
+        [
+          {
+            "node": "Score ≥ 80?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Score ≥ 80?": {
+      "main": [
+        [
+          {
+            "node": "Slack Alert — Enterprise Ready",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email Scorecard",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Scorecard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Alert — Enterprise Ready": {
+      "main": [
+        [
+          {
+            "node": "Log to Notion CRM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Scorecard": {
+      "main": [
+        [
+          {
+            "node": "Log to Notion CRM",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "guardpulse-n8n-v2"
+  }
+}

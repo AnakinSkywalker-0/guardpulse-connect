@@ -1,0 +1,138 @@
+{
+  "target_document": "sample_policy.txt",
+  "law_ids_checked": [
+    "DPDP_2023"
+  ],
+  "overall_verdict": "PARTIAL",
+  "score": 56.2,
+  "clauses": [
+    {
+      "clause_ref": "DPDP 2023 \u00a79",
+      "clause_summary": "Obtain verifiable consent of parent or lawful guardian for children's personal data",
+      "verdict": "FAIL",
+      "evidence": "No mention of obtaining consent from parents or guardians for children's data",
+      "confidence": 0.8
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a711",
+      "clause_summary": "Data Principal has right to access personal data information",
+      "verdict": "PASS",
+      "evidence": "Section mentions request for summary of personal data, identities of shared Data Fiduciaries, and processing activities",
+      "confidence": 0.9
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a712",
+      "clause_summary": "Data Principal has right to correction and erasure of personal data",
+      "verdict": "PASS",
+      "evidence": "Section mentions correction, completion, updating, and erasure of personal data upon request",
+      "confidence": 0.9
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a713",
+      "clause_summary": "Grievance redressal mechanism exists (not explicitly stated)",
+      "verdict": "INCONCLUSIVE",
+      "evidence": "No explicit mention of grievance redressal mechanism",
+      "confidence": 0.5
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a78",
+      "clause_summary": "Data retention and deletion policy defined (not applicable)",
+      "verdict": "INCONCLUSIVE",
+      "evidence": "No data retention or deletion policy mentioned, but data stored indefinitely",
+      "confidence": 0.6
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a75",
+      "clause_summary": "Privacy notice provided to users (not applicable)",
+      "verdict": "INCONCLUSIVE",
+      "evidence": "No explicit mention of privacy notice, but section mentions data collection and usage",
+      "confidence": 0.4
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a76",
+      "clause_summary": "Not applicable (\u00a79 only)",
+      "verdict": "INCONCLUSIVE",
+      "evidence": "No explicit mention of consent for children's data in section 6",
+      "confidence": 0.4
+    },
+    {
+      "clause_ref": "DPDP 2023 \u00a77",
+      "clause_summary": "Not applicable (not explicitly stated)",
+      "verdict": "INCONCLUSIVE",
+      "evidence": "No explicit mention of consent for children's data in section 7",
+      "confidence": 0.4
+    }
+  ],
+  "pii_findings": [
+    {
+      "pii_type": "NAME",
+      "context_snippet": "We collect your full name, email address, phone number, date of birth, and Aadhaar number when you register for our service.",
+      "risk_level": "MEDIUM",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use a pseudonym or alias instead of your real name."
+    },
+    {
+      "pii_type": "EMAIL",
+      "context_snippet": "We collect your full name, email address, phone number, date of birth, and Aadhaar number when you register for our service.",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use a secure password manager."
+    },
+    {
+      "pii_type": "PHONE",
+      "context_snippet": "We collect your full name, email address, phone number, date of birth, and Aadhaar number when you register for our service.",
+      "risk_level": "MEDIUM",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use a secure phone lock screen."
+    },
+    {
+      "pii_type": "AADHAAR",
+      "context_snippet": "We collect your full name, email address, phone number, date of birth, and Aadhaar number when you register for our service.",
+      "risk_level": "MEDIUM",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use a secure password manager."
+    },
+    {
+      "pii_type": "IP_ADDRESS",
+      "context_snippet": "We also automatically collect your IP address, device ID, browsing history, and precise GPS location when you use the app.",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use a VPN."
+    },
+    {
+      "pii_type": "LOCATION",
+      "context_snippet": "We also automatically collect your IP address, device ID, browsing history, and precise GPS location when you use the app.",
+      "risk_level": "MEDIUM",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use a secure location-sharing service."
+    },
+    {
+      "pii_type": "DATE_OF_BIRTH",
+      "context_snippet": "We collect your full name, email address, phone number, date of birth, and Aadhaar number when you register for our service.",
+      "risk_level": "MEDIUM",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use a secure password manager."
+    },
+    {
+      "pii_type": "DEVICE_ID",
+      "context_snippet": "We also automatically collect your IP address, device ID, browsing history, and precise GPS location when you use the app.",
+      "risk_level": "LOW",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use a secure device lock screen."
+    },
+    {
+      "pii_type": "BROWSING_HISTORY",
+      "context_snippet": "We also automatically collect your IP address, device ID, browsing history, and precise GPS location when you use the app.",
+      "risk_level": "MEDIUM",
+      "relevant_law": "DPDP Act 2023 \u00a72(t)",
+      "recommendation": "Use a secure browser."
+    }
+  ],
+  "summary": "The DPDP_2023 law audit found that your startup's policy is partially compliant, with 56.2% of clauses meeting the required standards. However, it failed to obtain verifiable consent from parents or guardians for children's personal data, which is a critical requirement.",
+  "recommendations": [
+    "Review and update the policy to include explicit language requiring verifiable consent from parents or guardians for children's personal data",
+    "Conduct a thorough risk assessment to identify potential child data breaches and implement measures to mitigate them",
+    "Establish a clear process for obtaining and storing parental consent, including documentation and record-keeping requirements"
+  ],
+  "audited_by": "GuardPulse Compliance Agent v1.0"
+}

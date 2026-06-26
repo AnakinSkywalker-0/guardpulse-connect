@@ -1,0 +1,24 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# System deps some of your stack needs (pdfplumber -> pillow/poppler bits)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+# sentence-transformers pulls in full CUDA torch by default — this container
+# only needs CPU inference (no GPU available in Docker Desktop anyway), so
+# install the CPU-only torch wheel first to skip ~3-4GB of unused CUDA libs.
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# Pre-create data dirs so volume mounts don't fail on first run
+RUN mkdir -p data/chroma_db data/reports data/uploads
+
+EXPOSE 8000
+
+CMD ["python", "run_api.py"]

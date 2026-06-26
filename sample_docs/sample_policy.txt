@@ -1,0 +1,66 @@
+PRIVACY POLICY — TechFlow Analytics Pvt. Ltd.
+Last Updated: January 2025
+
+1. INTRODUCTION
+TechFlow Analytics Pvt. Ltd. ("Company", "we", "us") operates a B2B SaaS platform
+for business intelligence and data analytics. This Privacy Policy explains how we
+collect, use, store, and share personal data when you use our services.
+
+2. DATA WE COLLECT
+We collect the following categories of personal data:
+- Full name and email address of registered users
+- Phone number and business address
+- Payment and billing information including credit card details
+- IP addresses and device identifiers
+- Browser cookies and session tokens
+- Usage logs and browsing history within the platform
+- Aadhaar number (for KYC verification of Indian enterprise customers)
+- Date of birth (for account verification)
+
+3. PURPOSE OF COLLECTION
+We collect personal data for the following purposes:
+- To provide and improve our analytics services
+- To process payments and manage billing
+- For customer support and communication
+- To comply with applicable laws and regulations
+- For internal analytics and product improvement
+
+4. DATA SHARING
+We may share your personal data with:
+- Third-party payment processors (Razorpay, Stripe)
+- Cloud infrastructure providers (AWS, Google Cloud)
+- Analytics partners for aggregate reporting
+- Law enforcement when required by court order
+
+We do not sell your personal data to advertisers or data brokers.
+
+5. DATA RETENTION
+We retain personal data for as long as your account is active.
+Upon account deletion, data is removed within 90 days from our primary systems.
+Backup copies may be retained for up to 12 months.
+
+6. USER RIGHTS
+You may contact us to:
+- Request access to your personal data
+- Correct inaccurate information
+- Request deletion of your account data
+
+To exercise these rights, email: privacy@techflow.io
+
+7. CHILDREN'S DATA
+Our platform is intended for business use only (18+).
+We do not knowingly collect data from minors.
+
+8. SECURITY
+We use industry-standard encryption (AES-256) for data at rest.
+All data in transit is protected by TLS 1.3.
+We conduct annual security audits.
+
+9. CONTACT
+Data Protection Officer: Ramesh Kumar
+Email: dpo@techflow.io
+Address: 4th Floor, Prestige Tower, MG Road, Bangalore 560001
+
+10. CHANGES TO THIS POLICY
+We reserve the right to update this policy at any time.
+Users will be notified of material changes via email.

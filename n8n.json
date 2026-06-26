@@ -1,0 +1,94 @@
+{
+  "name": "GuardPulse Matchmaking Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "guardpulse-match",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:8000/api/match",
+        "method": "POST",
+        "authentication": "none",
+        "sendHeaders": true,
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "problem_text",
+              "value": "={{ $json.body.problem }}"
+            },
+            {
+              "name": "top_k",
+              "value": 3
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "call-api",
+      "name": "Call GuardPulse API",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.matches.length }}",
+              "operation": "larger",
+              "value2": 0
+            }
+          ]
+        }
+      },
+      "id": "check-matches",
+      "name": "Check if Matches Found",
+      "type": "n8n-nodes-base.if",
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "guardpulse@example.com",
+        "toEmail": "={{ $json.body.email }}",
+        "subject": "Your GuardPulse Match Results",
+        "htmlBody": "=<h2>GuardPulse Match Results</h2><p>Based on your problem: {{ $json.body.problem }}</p><h3>Top Matches:</h3>{{ $json.matches_summary }}"
+      },
+      "id": "send-email",
+      "name": "Send Email Results",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [850, 250]
+    },
+    {
+      "parameters": {
+        "htmlBody": "<h2>No Matches Found</h2><p>Sorry, no startups match your requirements. Try relaxing your criteria or register more startups.</p>"
+      },
+      "id": "no-matches",
+      "name": "No Matches Response",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [850, 350]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [[{"node": "Call GuardPulse API", "type": "main", "index": 0}]]
+    },
+    "Call GuardPulse API": {
+      "main": [[{"node": "Check if Matches Found", "type": "main", "index": 0}]]
+    },
+    "Check if Matches Found": {
+      "main": [
+        [{"node": "Send Email Results", "type": "main", "index": 0}],
+        [{"node": "No Matches Response", "type": "main", "index": 0}]
+      ]
+    }
+  }
+}

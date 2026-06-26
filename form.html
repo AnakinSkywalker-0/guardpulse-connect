@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GuardPulse — Enterprise Compliance Audit</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f5f4f0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .container { max-width: 560px; width: 100%; }
+
+  .header { text-align: center; margin-bottom: 2rem; }
+  .header h1 { font-size: 26px; font-weight: 600; color: #1a1a18; }
+  .header p  { font-size: 14px; color: #73726c; margin-top: 6px; }
+
+  .badge {
+    display: inline-block;
+    background: #e1f5ee;
+    color: #0f6e56;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    border: 0.5px solid #d3d1c7;
+    padding: 2rem;
+  }
+
+  .field { margin-bottom: 1.25rem; }
+  label  { display: block; font-size: 13px; font-weight: 500; color: #3d3d3a; margin-bottom: 6px; }
+
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 0.5px solid #d3d1c7;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1a1a18;
+    background: #fafaf8;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  input:focus { border-color: #1D9E75; background: #fff; }
+
+  .upload-area {
+    border: 1.5px dashed #d3d1c7;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    background: #fafaf8;
+    position: relative;
+  }
+  .upload-area:hover { border-color: #1D9E75; background: #f0fdf8; }
+  .upload-area.has-file { border-color: #1D9E75; background: #f0fdf8; }
+  .upload-area input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .upload-icon { font-size: 28px; margin-bottom: 6px; }
+  .upload-text { font-size: 13px; color: #73726c; }
+  .upload-text strong { color: #1D9E75; }
+  .file-name { font-size: 13px; color: #1D9E75; font-weight: 500; margin-top: 6px; }
+
+  .hint { font-size: 11px; color: #888780; margin-top: 4px; }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: #1D9E75;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.15s, transform 0.1s;
+  }
+  button[type="submit"]:hover   { background: #0f6e56; }
+  button[type="submit"]:active  { transform: scale(0.99); }
+  button[type="submit"]:disabled { background: #9FE1CB; cursor: not-allowed; }
+
+  .status {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    font-size: 13px;
+    display: none;
+  }
+  .status.loading { background: #e1f5ee; color: #0f6e56; display: block; }
+  .status.error   { background: #fcebeb; color: #a32d2d; display: block; }
+  .status.success { background: #eaf3de; color: #27500a; display: block; }
+
+  .result-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 0.5px solid #d3d1c7;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    display: none;
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .score-big {
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .score-big.ready     { color: #1D9E75; }
+  .score-big.condition { color: #BA7517; }
+  .score-big.notready  { color: #A32D2D; }
+
+  .badge-pill {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+  .badge-ready     { background: #e1f5ee; color: #0f6e56; }
+  .badge-condition { background: #faeeda; color: #633806; }
+  .badge-notready  { background: #fcebeb; color: #791f1f; }
+
+  .sub-scores {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .sub-score {
+    flex: 1;
+    background: #f5f4f0;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .sub-score .val  { font-size: 20px; font-weight: 500; color: #1a1a18; }
+  .sub-score .lbl  { font-size: 11px; color: #73726c; margin-top: 2px; }
+
+  .summary-text { font-size: 13px; color: #3d3d3a; line-height: 1.6; }
+
+  .divider { border: none; border-top: 0.5px solid #d3d1c7; margin: 1rem 0; }
+
+  .steps-title { font-size: 12px; font-weight: 600; color: #73726c; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .steps-list  { list-style: none; }
+  .steps-list li { font-size: 13px; color: #3d3d3a; padding: 4px 0; padding-left: 16px; position: relative; }
+  .steps-list li::before { content: "→"; position: absolute; left: 0; color: #1D9E75; }
+
+  .footer { text-align: center; margin-top: 1.5rem; font-size: 12px; color: #888780; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <span class="badge">GuardPulse AI Compliance</span>
+    <h1>Get Your Enterprise-Ready Badge</h1>
+    <p>Upload your Privacy Policy or technical document. Our AI swarm audits it against DPDP Act 2023 and EU AI Act 2024 in under 2 minutes.</p>
+  </div>
+
+  <div class="card">
+    <form id="auditForm">
+
+      <div class="field">
+        <label for="startup_name">Startup / Company Name</label>
+        <input type="text" id="startup_name" name="startup_name" placeholder="e.g. Acme AI" required>
+      </div>
+
+      <div class="field">
+        <label for="contact_email">Contact Email</label>
+        <input type="email" id="contact_email" name="contact_email" placeholder="you@startup.com" required>
+        <div class="hint">Your compliance scorecard will be emailed here automatically.</div>
+      </div>
+
+      <div class="field">
+        <label>Upload Document</label>
+        <div class="upload-area" id="uploadArea">
+          <input type="file" id="document" name="document" accept=".txt,.pdf" required onchange="onFileChange(this)">
+          <div class="upload-icon">📄</div>
+          <div class="upload-text">
+            <strong>Click to upload</strong> or drag and drop<br>
+            Privacy Policy, Technical Doc, AI System Description
+          </div>
+          <div class="file-name" id="fileName"></div>
+        </div>
+        <div class="hint">Accepts .txt or .pdf · Max 10MB</div>
+      </div>
+
+      <button type="submit" id="submitBtn">Run Compliance Audit</button>
+    </form>
+
+    <div class="status" id="status"></div>
+  </div>
+
+  <!-- Result card (shown after audit) -->
+  <div class="result-card" id="resultCard">
+    <div class="score-row">
+      <div>
+        <div class="score-big" id="scoreBig">—</div>
+        <div style="font-size:13px;color:#73726c;margin-top:2px;">GuardPulse Score</div>
+      </div>
+      <div>
+        <div class="badge-pill" id="badgePill">—</div>
+        <div style="font-size:12px;color:#73726c;margin-top:6px;" id="reportId"></div>
+      </div>
+    </div>
+
+    <div class="sub-scores">
+      <div class="sub-score">
+        <div class="val" id="legalScore">—</div>
+        <div class="lbl">Legal score</div>
+      </div>
+      <div class="sub-score">
+        <div class="val" id="techScore">—</div>
+        <div class="lbl">Tech score</div>
+      </div>
+      <div class="sub-score">
+        <div class="val" id="hallRate">—</div>
+        <div class="lbl">Hallucinations</div>
+      </div>
+    </div>
+
+    <div class="summary-text" id="summaryText"></div>
+
+    <hr class="divider">
+
+    <div class="steps-title">Next Steps</div>
+    <ul class="steps-list" id="stepsList"></ul>
+  </div>
+
+  <div class="footer">Powered by GuardPulse · DPDP Act 2023 · EU AI Act 2024</div>
+</div>
+
+<script>
+  // ── Config ──────────────────────────────────────────────────────────────────
+  // Change this if your API runs on a different port
+  const API_URL = "http://localhost:8000/webhook/audit";
+
+  // ── File picker ─────────────────────────────────────────────────────────────
+  function onFileChange(input) {
+    const area = document.getElementById("uploadArea");
+    const name = document.getElementById("fileName");
+    if (input.files.length > 0) {
+      area.classList.add("has-file");
+      name.textContent = input.files[0].name;
+    } else {
+      area.classList.remove("has-file");
+      name.textContent = "";
+    }
+  }
+
+  // ── Status helpers ───────────────────────────────────────────────────────────
+  function setStatus(msg, type) {
+    const el = document.getElementById("status");
+    el.textContent = msg;
+    el.className = "status " + type;
+  }
+
+  function hideStatus() {
+    document.getElementById("status").className = "status";
+  }
+
+  // ── Badge styling ────────────────────────────────────────────────────────────
+  function applyBadgeStyle(score, badgeEl, scoreEl) {
+    if (score >= 80) {
+      badgeEl.className = "badge-pill badge-ready";
+      scoreEl.className = "score-big ready";
+    } else if (score >= 60) {
+      badgeEl.className = "badge-pill badge-condition";
+      scoreEl.className = "score-big condition";
+    } else {
+      badgeEl.className = "badge-pill badge-notready";
+      scoreEl.className = "score-big notready";
+    }
+  }
+
+  // ── Form submit ──────────────────────────────────────────────────────────────
+  document.getElementById("auditForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const btn  = document.getElementById("submitBtn");
+    const form = document.getElementById("auditForm");
+    const file = document.getElementById("document").files[0];
+
+    if (!file) {
+      setStatus("Please upload a document.", "error");
+      return;
+    }
+
+    // Disable form during audit
+    btn.disabled    = true;
+    btn.textContent = "Running audit… (this takes ~2 minutes)";
+    setStatus("Swarm starting — Auditor Agent, Tech Agent, and Critic Agent are running…", "loading");
+    document.getElementById("resultCard").style.display = "none";
+
+    const formData = new FormData();
+    formData.append("startup_name",  document.getElementById("startup_name").value.trim());
+    formData.append("contact_email", document.getElementById("contact_email").value.trim());
+    formData.append("document",      file);
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        body:   formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ detail: "Unknown error" }));
+        throw new Error(err.detail || `HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      // Populate result card
+      const scoreEl = document.getElementById("scoreBig");
+      const badgeEl = document.getElementById("badgePill");
+
+      scoreEl.textContent = data.guardpulse_score.toFixed(1);
+      badgeEl.textContent = data.badge.replace("_", " ");
+      applyBadgeStyle(data.guardpulse_score, badgeEl, scoreEl);
+
+      document.getElementById("legalScore").textContent = data.legal_score.toFixed(1);
+      document.getElementById("techScore").textContent  = data.tech_score.toFixed(1);
+      document.getElementById("hallRate").textContent   = (data.hallucination_rate * 100).toFixed(0) + "%";
+      document.getElementById("summaryText").textContent = data.executive_summary;
+      document.getElementById("reportId").textContent   = "Report ID: " + data.report_id;
+
+      const stepsList = document.getElementById("stepsList");
+      stepsList.innerHTML = "";
+      (data.next_steps || []).forEach(step => {
+        const li = document.createElement("li");
+        li.textContent = step;
+        stepsList.appendChild(li);
+      });
+
+      document.getElementById("resultCard").style.display = "block";
+      setStatus("Audit complete! Your scorecard has been emailed to " + data.contact_email, "success");
+
+    } catch (err) {
+      setStatus("Audit failed: " + err.message, "error");
+    } finally {
+      btn.disabled    = false;
+      btn.textContent = "Run Compliance Audit";
+    }
+  });
+</script>
+
+</body>
+</html>

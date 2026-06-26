@@ -1,0 +1,62 @@
+AI SYSTEM DISCLOSURE DOCUMENT — TechFlow Analytics Pvt. Ltd.
+Product: TechFlow Predict (AI-Powered Business Forecasting Engine)
+Version: 2.1
+Date: January 2025
+
+1. SYSTEM DESCRIPTION
+TechFlow Predict is an AI-powered forecasting tool that analyses historical
+business data to generate revenue predictions, customer churn scores, and
+inventory recommendations for enterprise clients.
+
+2. AI TECHNIQUES USED
+- Gradient Boosting (XGBoost) for tabular prediction
+- LSTM neural networks for time-series forecasting
+- Large Language Model (GPT-4 based) for natural language report generation
+- Automated decision-making for low-risk inventory reorder suggestions
+
+3. RISK CLASSIFICATION
+We consider TechFlow Predict to be a limited-risk AI system.
+The system does not make final decisions — all outputs are recommendations
+reviewed by human analysts before action is taken.
+
+4. INTENDED USE
+- Revenue forecasting for finance teams
+- Customer churn prediction for CRM teams
+- Inventory optimisation for supply chain managers
+The system is not intended for use in healthcare, law enforcement,
+credit scoring, or recruitment decisions.
+
+5. TRANSPARENCY TO USERS
+Users are informed at login that AI-generated recommendations are present.
+All AI outputs are labelled with a confidence score (0-100%).
+Users can request human review of any AI recommendation.
+
+6. DATA USED FOR TRAINING
+Training data consists of anonymised enterprise transaction records.
+No personal data of end consumers is used in model training.
+Data governance review was conducted in Q3 2024.
+
+7. HUMAN OVERSIGHT
+A human analyst must approve any recommendation exceeding $50,000 in value.
+The system includes an override mechanism for all automated suggestions.
+Monthly audits are performed by our AI Safety team.
+
+8. PERFORMANCE AND ACCURACY
+Average forecast accuracy: 87% (MAPE < 13%)
+The system has known limitations with data from newly formed companies
+(less than 12 months of history).
+
+9. PROHIBITED USES
+This system must NOT be used for:
+- Profiling individuals based on protected characteristics
+- Predicting individual employee performance
+- Any use case involving biometric data
+- Real-time remote biometric identification
+
+10. INCIDENT REPORTING
+AI-related incidents must be reported to ai-safety@techflow.io within 72 hours.
+Serious incidents are escalated to our board within 24 hours.
+
+11. CONTACT
+AI Safety Officer: Priya Venkataraman
+Email: ai-safety@techflow.io

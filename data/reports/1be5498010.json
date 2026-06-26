@@ -1,0 +1,123 @@
+{
+  "startup_name": "TestCo",
+  "document_audited": "d43054bb7fb0488d8c907c5e20e3df04.txt",
+  "legal_score": 40.0,
+  "tech_score": 100.0,
+  "critic_penalty": 0.0,
+  "guardpulse_score": 70.0,
+  "badge": "CONDITIONAL",
+  "legal_audit": {
+    "target_document": "d43054bb7fb0488d8c907c5e20e3df04.txt",
+    "laws_checked": [
+      "DPDP_2023",
+      "EU_AI_ACT_2024"
+    ],
+    "clauses": [
+      {
+        "clause_ref": "EU AI Art.5",
+        "clause_summary": "No prohibited AI practices used",
+        "verdict": "INCONCLUSIVE",
+        "evidence": "Document is not an AI system disclosure \u2014 EU AI Act not applicable.",
+        "confidence": 0.9
+      },
+      {
+        "clause_ref": "EU AI Art.9",
+        "clause_summary": "Risk management system documented",
+        "verdict": "INCONCLUSIVE",
+        "evidence": "Document is not an AI system disclosure \u2014 EU AI Act not applicable.",
+        "confidence": 0.9
+      },
+      {
+        "clause_ref": "EU AI Art.13",
+        "clause_summary": "Transparency obligations met",
+        "verdict": "INCONCLUSIVE",
+        "evidence": "Document is not an AI system disclosure \u2014 EU AI Act not applicable.",
+        "confidence": 0.9
+      },
+      {
+        "clause_ref": "EU AI Art.14",
+        "clause_summary": "Human oversight mechanisms defined",
+        "verdict": "INCONCLUSIVE",
+        "evidence": "Document is not an AI system disclosure \u2014 EU AI Act not applicable.",
+        "confidence": 0.9
+      }
+    ],
+    "pii_findings": [],
+    "legal_score": 40.0,
+    "overall_verdict": "PARTIAL",
+    "summary": "Compliance score: 40.0/100 (PARTIAL). Review failed clauses.",
+    "recommendations": []
+  },
+  "tech_audit": {
+    "target_document": "/app/data/uploads/d43054bb7fb0488d8c907c5e20e3df04.txt",
+    "security_findings": [],
+    "tech_score": 100.0,
+    "api_documented": false,
+    "encryption_present": false,
+    "auth_present": false,
+    "data_minimisation": false,
+    "summary": "Tech security score is 100.0/100. 0 security findings require attention.",
+    "recommendations": []
+  },
+  "critic_result": {
+    "total_claims_checked": 4,
+    "valid_claims": 4,
+    "invalid_claims": 0,
+    "citation_checks": [
+      {
+        "original_claim": "No prohibited AI practices used",
+        "citation_ref": "EU AI Art.5",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.3
+      },
+      {
+        "original_claim": "Risk management system documented",
+        "citation_ref": "EU AI Art.9",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.3
+      },
+      {
+        "original_claim": "Transparency obligations met",
+        "citation_ref": "EU AI Art.13",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.3
+      },
+      {
+        "original_claim": "Human oversight mechanisms defined",
+        "citation_ref": "EU AI Art.14",
+        "is_valid": true,
+        "correction": null,
+        "confidence": 0.3
+      }
+    ],
+    "hallucination_rate": 0.0,
+    "critic_verdict": "RELIABLE",
+    "notes": "All 4 citations verified against ChromaDB law text."
+  },
+  "executive_summary": "GuardPulse Score: 70.0/100. Badge: CONDITIONAL.",
+  "top_risks": [
+    "Review legal audit",
+    "Review tech audit",
+    "Address critical findings"
+  ],
+  "top_strengths": [
+    "Audit completed",
+    "RAG-grounded analysis",
+    "Multi-law coverage"
+  ],
+  "next_steps": [
+    "Fix failed clauses",
+    "Address security findings",
+    "Re-audit"
+  ],
+  "audited_by": "GuardPulse Swarm v2.0",
+  "contact_email": "test@example.com",
+  "submitted_at": "2026-06-20T15:16:08.065417",
+  "report_id": "1be5498010",
+  "is_enterprise_ready": false,
+  "hallucination_rate": 0.0,
+  "report_url": "/api/reports/1be5498010"
+}

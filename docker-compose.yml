@@ -1,0 +1,62 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: guardpulse-api
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      - API_HOST=0.0.0.0
+      - API_RELOAD=false
+    volumes:
+      - ./data:/app/data
+      - ./sample_docs:/app/sample_docs
+    restart: unless-stopped
+    networks:
+      - guardpulse-net
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    container_name: guardpulse-ui
+    ports:
+      - "8501:8501"
+    env_file: .env
+    environment:
+      - GUARDPULSE_API_URL=http://api:8000
+    depends_on:
+      - api
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - guardpulse-net
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: guardpulse-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      - GENERIC_TIMEZONE=Asia/Kolkata
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - api
+    restart: unless-stopped
+    networks:
+      - guardpulse-net
+
+networks:
+  guardpulse-net:
+    driver: bridge
+
+volumes:
+  n8n_data:
